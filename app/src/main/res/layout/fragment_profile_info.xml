@@ -1,42 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ProfileInfoFragment">
 
 
     <ImageView
         android:id="@+id/profile_image_viewdetail"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/ic_launcher_round"/>
-    <TextView
-        android:id="@+id/username_textdetail"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_below="@id/profile_image_viewdetail"
-        android:layout_marginLeft="@dimen/fab_margin"/>
-    <TextView
-        android:id="@+id/git_url_textdetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_below="@id/username_textdetail"
-        android:layout_marginLeft="@dimen/fab_margin"/>
-    <TextView
-        android:id="@+id/git_id_textdetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_below="@id/git_url_textdetail"
-        android:layout_marginLeft="@dimen/fab_margin"/>
-    <TextView
-        android:id="@+id/git_avatarurl_textdetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_below="@id/git_id_textdetail"
-        android:layout_marginLeft="@dimen/fab_margin"/>
-</FrameLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/username_textdetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/git_url_textdetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@id/username_textdetail"
+            android:layout_marginLeft="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/git_id_textdetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@id/git_url_textdetail"
+            android:layout_marginLeft="@dimen/fab_margin"/>
+        <TextView
+            android:id="@+id/git_avatarurl_textdetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_below="@id/git_id_textdetail"
+            android:layout_marginLeft="@dimen/fab_margin"/>
+    </RelativeLayout>
+</LinearLayout>

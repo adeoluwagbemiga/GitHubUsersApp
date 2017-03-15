@@ -12,9 +12,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by Merlyne on 3/9/2017.
- */
+
 
 public class HttpHandler {
     private static final String TAG = HttpHandler.class.getSimpleName();

@@ -1,20 +1,12 @@
 package com.example.users;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -27,11 +19,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
-
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,13 +31,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ProfileInfoFragment.OnFragmentInteractionListener {
-    //private List<GitUser> gitUserList = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private ProgressBar progressBar;
+        implements NavigationView.OnNavigationItemSelectedListener {
+
     private String TAG = MainActivity.class.getSimpleName();
     private static String url = "https://api.github.com/search/users?q=location:lagos";
     private ProgressDialog pDialog;
@@ -53,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     private ListView lv;
     //private ImageView imageView;
     ListViewAdapter listViewAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +57,6 @@ public class MainActivity extends AppCompatActivity
         else{
             Toast.makeText(getApplicationContext(), " NO Network Connection!", Toast.LENGTH_SHORT).show();
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,18 +112,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_about) {
+            // Handle the about action
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -158,13 +130,7 @@ public class MainActivity extends AppCompatActivity
             return false;
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-
-    /**
+       /**
      * Async task class to get json by making HTTP call
      */
     private class GetContacts extends AsyncTask<Void, Void, Void> {
@@ -203,7 +169,7 @@ public class MainActivity extends AppCompatActivity
                         String id = c.getString("id");
                         String name = c.getString("login");
                         String avatar = c.getString("avatar_url");
-                        String address = c.getString("url");
+                        String address = c.getString("html_url");
 
                         // tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
@@ -232,12 +198,12 @@ public class MainActivity extends AppCompatActivity
 
                 }
             } else {
-                Log.e(TAG, "Couldn't get json from server.");
+                Log.e(TAG, "Couldn't get data from server.");
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                "Couldn't get data from server. Check you network connection!",
                                 Toast.LENGTH_LONG)
                                 .show();
                     }
@@ -265,15 +231,17 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     HashMap<String, String> gituser = (HashMap<String, String>)parent.getItemAtPosition(position);
+                    final String Login = gituser.get("login");
+                    final String Giturl = gituser.get("url");
+                    final String Avatarurl = gituser.get("avatar_url");
+                    String Id = gituser.get("id");
+                    Intent intent = new Intent(MainActivity.this, ProfileDetailActivity.class);
 
-                    Intent intent = new Intent();
-                    intent.putExtra("gituser", gituser);
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ProfileInfoFragment profileInfoFragment = new ProfileInfoFragment();
-
-                    ft.replace(R.id.fragment_framelayout, profileInfoFragment.newInstance(intent));
-
-                    ft.commit();
+                    intent.putExtra("login", Login);
+                    intent.putExtra("url", Giturl);
+                    intent.putExtra("avatar_url", Avatarurl);
+                    intent.putExtra("id", Id);
+                    startActivity(intent);
 
                 }
             });

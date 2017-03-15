@@ -68,52 +68,17 @@ public class ProfileInfoFragment extends Fragment {
      * @return A new instance of fragment ProfileInfoFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileInfoFragment newInstance(Intent intent) {
+    public static ProfileInfoFragment newInstance(String login, String giturl, String avatarurl, String id) {
         ProfileInfoFragment fragment = new ProfileInfoFragment();
        /* Intent intent = new Intent();*/
-
-           Bundle intentExtras = intent.getExtras();
-        String jsonstr = intentExtras.get("gituser").toString();
-        JSONObject jsonObj = null;
-        try {
-            jsonObj = new JSONObject(jsonstr);
-            JSONArray gitcontacts = jsonObj.getJSONArray("gituser");
-            //HashMap<String, String> gituser = (HashMap<String, String>) intentExtras.get("gituser");
-            for (int i = 0; i < gitcontacts.length(); i++) {
-                JSONObject c = gitcontacts.getJSONObject(i);
-
-                String id = c.getString("id");
-                String name = c.getString("login");
-                String avatar = c.getString("avatar_url");
-                String address = c.getString("url");
-
-                // tmp hash map for single contact
-                HashMap<String, String> contact = new HashMap<>();
-
-                // adding each child node to HashMap key => value
-                contact.put("id", id);
-                contact.put("login", name);
-                contact.put("url", address);
-                contact.put("avatar_url", avatar);
-                //contact.put("mobile", mobile);
-
-                // adding contact to contact list
+            // adding contact to contact list
                 Bundle args = new Bundle();
-                args.putString(ARG_PARAM1, name);
-                args.putString(ARG_PARAM2, address);
-                args.putString(ARG_PARAM3, avatar);
+                args.putString(ARG_PARAM1, login);
+                args.putString(ARG_PARAM2, giturl);
+                args.putString(ARG_PARAM3, avatarurl);
                 args.putString(ARG_PARAM4, id);
 
                 fragment.setArguments(args);
-            }
-
-            //Bundle intentExtras = intent.getExtras();
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
 
         return fragment;
     }
