@@ -27,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/git_username"
-            android:labelFor="@id/username_textdetail"
             android:layout_marginLeft="@dimen/fab_margin"/>
         <View
             android:id="@+id/username_view_line"
