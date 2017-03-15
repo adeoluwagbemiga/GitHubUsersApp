@@ -26,8 +26,7 @@
             android:id="@+id/username_textDisplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:text="Git Username"
+            android:text="@string/git_username"
             android:labelFor="@id/username_textdetail"
             android:layout_marginLeft="@dimen/fab_margin"/>
         <View
@@ -58,8 +57,7 @@
             android:id="@+id/git_url_textDisplay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:text="Git URL"
+            android:text="@string/git_url"
             android:layout_marginLeft="@dimen/fab_margin"/>
         <View
             android:id="@+id/url_view_line"
@@ -90,13 +88,5 @@
     android:layout_gravity="center"
     android:src="@drawable/ic_menu_share"
     android:elevation="2dp"
-    android:background="@color/colorAccent" />
-    <!--<android.support.design.widget.FloatingActionButton
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fab_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />-->
+    android:background="@color/colorPrimary" />
 </LinearLayout>
